@@ -7,10 +7,6 @@ var app = express();
 
 var days = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag'];
 
-app.get('/', function(req, res) {
-    res.send('Running');
-});
-
 function scrapeSlagthuset() {
     return new Promise(function(resolve, reject) {
         var url = 'http://www.slagthus.se/';
