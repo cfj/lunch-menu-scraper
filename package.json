@@ -22,5 +22,8 @@
     "express": "^4.12.4",
     "promise": "^7.0.1",
     "request": "^2.55.0"
+  },
+  "devDependencies": {
+    "babel": "^5.4.7"
   }
 }
