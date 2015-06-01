@@ -1,5 +1,5 @@
-const scrape = require('./scraper');
-const Promise = require('promise');
+import scrape from './scraper';
+import Promise from 'promise';
 
 function slagthuset() {
     return new Promise((resolve, reject) => {

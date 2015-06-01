@@ -1,7 +1,8 @@
-const express = require('express');
-const Promise = require('promise');
-const fs = require('fs');
-const scrapers = require('./scrapers');
+import express from 'express';
+import Promise from 'promise';
+import fs from 'fs';
+import scrapers from './scrapers';
+
 const app = express();
 const outputName = '../menus.json';
 
