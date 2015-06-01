@@ -12,12 +12,14 @@ app.get('/scrape', (req, res) => {
     promises.push(scrapers.slagthuset());
     promises.push(scrapers.meck());
     promises.push(scrapers.miamarias());
+    promises.push(scrapers.valfarden());
 
     Promise.all(promises)
         .then(response => {
             restaurants.slagthuset = response[0];
             restaurants.meck       = response[1];
             restaurants.miamarias  = response[2];
+            restaurants.valfarden  = response[3];
 
             fs.writeFile(outputName, JSON.stringify(restaurants), err => {
                 if(err) {

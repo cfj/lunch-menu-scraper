@@ -11,7 +11,7 @@ function scrape(url, selector, callback) {
         if(!err) {
             let $ = cheerio.load(html);
 
-            $(selector).each((index, element) => content += $(element).text());
+            $(selector).each((index, element) => content += ' ' + $(element).text());
 
             content = content.split(' ').map(e => e.trim());
 

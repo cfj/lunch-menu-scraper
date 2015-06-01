@@ -24,11 +24,11 @@ function meck() {
         let menu = [];
 
         scrape(url, '#veckanslunch article', week => {
-            menu[0] = week[0].slice(2).join(' ').replace('Dagens: ', '').replace(/\n+/g, '').replace(/\t+/g, '').trim();
-            menu[1] = week[1].slice(2).join(' ').replace('Dagens: ', '').replace(/\n+/g, '').replace(/\t+/g, '').trim();
-            menu[2] = week[2].slice(2).join(' ').replace('Dagens: ', '').replace(/\n+/g, '').replace(/\t+/g, '').trim();
-            menu[3] = week[3].slice(2).join(' ').replace('Dagens: ', '').replace(/\n+/g, '').replace(/\t+/g, '').trim();
-            menu[4] = week[4].slice(2).join(' ').replace('Dagens: ', '').replace(/\n+/g, '').replace(/\t+/g, '').trim();
+            menu[0] = week[0].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
+            menu[1] = week[1].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
+            menu[2] = week[2].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
+            menu[3] = week[3].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
+            menu[4] = week[4].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
 
             resolve(menu);
         });
@@ -55,8 +55,26 @@ function miamarias() {
     });
 }
 
+function valfarden() {
+    return new Promise((resolve, reject) => {
+        let url = 'http://valfarden.nu/?page_id=14';
+        let menu = [];
+
+        scrape(url, '.single_inside_content p', week => {
+            menu[0] = week[0].slice(2).join(' ').trim();
+            menu[1] = week[1].slice(2).join(' ').trim();
+            menu[2] = week[2].slice(2).join(' ').trim();
+            menu[3] = week[3].slice(2).join(' ').trim();
+            menu[4] = week[4].slice(2).join(' ').trim();
+
+            resolve(menu);
+        });
+    });
+}
+
 module.exports = {
     slagthuset,
     meck,
-    miamarias
+    miamarias,
+    valfarden
 }
