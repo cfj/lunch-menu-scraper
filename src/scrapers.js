@@ -1,14 +1,12 @@
-'use strict';
-
-var scrape = require('./scraper');
-var Promise = require('promise');
+const scrape = require('./scraper');
+const Promise = require('promise');
 
 function slagthuset() {
-    return new Promise(function (resolve, reject) {
-        var url = 'http://www.slagthus.se/';
-        var menu = {};
+    return new Promise((resolve, reject) => {
+        let url = 'http://www.slagthus.se/';
+        let menu = {};
 
-        scrape(url, '.printable', function (week) {
+        scrape(url, '.printable', week => {
             menu.mon = week[0].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
             menu.tue = week[1].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
             menu.wed = week[2].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
@@ -21,11 +19,11 @@ function slagthuset() {
 }
 
 function meck() {
-    return new Promise(function (resolve, reject) {
-        var url = 'http://meckok.se/lunch/';
-        var menu = {};
+    return new Promise((resolve, reject) => {
+        let url = 'http://meckok.se/lunch/';
+        let menu = {};
 
-        scrape(url, '#veckanslunch article', function (week) {
+        scrape(url, '#veckanslunch article', week => {
             menu.mon = week[0].slice(2).join(' ').replace('Dagens: ', '').replace(/\n+/g, '').replace(/\t+/g, '').trim();
             menu.tue = week[1].slice(2).join(' ').replace('Dagens: ', '').replace(/\n+/g, '').replace(/\t+/g, '').trim();
             menu.wed = week[2].slice(2).join(' ').replace('Dagens: ', '').replace(/\n+/g, '').replace(/\t+/g, '').trim();
@@ -38,11 +36,11 @@ function meck() {
 }
 
 function miamarias() {
-    return new Promise(function (resolve, reject) {
-        var url = 'http://www.miamarias.nu/';
-        var menu = {};
+    return new Promise((resolve, reject) => {
+        let url = 'http://www.miamarias.nu/';
+        let menu = {};
 
-        scrape(url, '.et-tabs-content', function (week) {
+        scrape(url, '.et-tabs-content', week => {
             menu.mon = week[0].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
             menu.tue = week[1].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
             menu.wed = week[2].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
@@ -58,7 +56,7 @@ function miamarias() {
 }
 
 module.exports = {
-    slagthuset: slagthuset,
-    meck: meck,
-    miamarias: miamarias
-};
+    slagthuset,
+    meck,
+    miamarias
+}
