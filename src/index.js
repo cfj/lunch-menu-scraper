@@ -2,9 +2,12 @@ import express from 'express';
 import Promise from 'promise';
 import fs from 'fs';
 import scrapers from './scrapers';
+import cors from 'cors';
 
 const app = express();
 const outputName = '../menus.json';
+
+app.use(cors());
 
 app.get('/scrape', (req, res) => {
     let restaurants = {};
