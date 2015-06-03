@@ -21,11 +21,11 @@ app.get('/scrape', (req, res) => {
 
     Promise.all(promises)
         .then(response => {
-            restaurants.slagthuset = response[0];
-            restaurants.meck       = response[1];
-            restaurants.miamarias  = response[2];
-            restaurants.valfarden  = response[3];
-            restaurants.glasklart  = response[4];
+            restaurants['Slagthuset'] = response[0];
+            restaurants['M.E.C.K']    = response[1];
+            restaurants['MiaMarias']  = response[2];
+            restaurants['Välfärden']  = response[3];
+            restaurants['Glasklart']  = response[4];
 
             fs.writeFile(outputName, JSON.stringify(restaurants), err => {
                 if(err) {
