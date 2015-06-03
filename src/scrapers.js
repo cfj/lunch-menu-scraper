@@ -72,9 +72,27 @@ function valfarden() {
     });
 }
 
+function glasklart() {
+    return new Promise((resolve, reject) => {
+        let url = 'http://glasklart.eu/lunch/';
+        let menu = [];
+
+        scrape(url, '#cardcatid-8', week => {
+            menu[0] = week[0].slice(2).join(' ').trim();
+            menu[1] = week[1].slice(2).join(' ').trim();
+            menu[2] = week[2].slice(2).join(' ').trim();
+            menu[3] = week[3].slice(2).join(' ').trim();
+            menu[4] = week[4].slice(2).join(' ').trim();
+
+            resolve(menu);
+        });
+    });
+}
+
 module.exports = {
     slagthuset,
     meck,
     miamarias,
-    valfarden
+    valfarden,
+    glasklart
 }

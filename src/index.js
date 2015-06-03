@@ -14,6 +14,7 @@ app.get('/scrape', (req, res) => {
     promises.push(scrapers.meck());
     promises.push(scrapers.miamarias());
     promises.push(scrapers.valfarden());
+    promises.push(scrapers.glasklart());
 
     Promise.all(promises)
         .then(response => {
@@ -21,6 +22,7 @@ app.get('/scrape', (req, res) => {
             restaurants.meck       = response[1];
             restaurants.miamarias  = response[2];
             restaurants.valfarden  = response[3];
+            restaurants.glasklart  = response[4];
 
             fs.writeFile(outputName, JSON.stringify(restaurants), err => {
                 if(err) {
