@@ -10,7 +10,6 @@ const outputName = '../menus.json';
 app.use(cors());
 
 app.get('/scrape', (req, res) => {
-    let restaurants = {};
     let result = {};
     let promises = [];
 
