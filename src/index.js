@@ -11,7 +11,11 @@ app.use(cors());
 
 app.get('/scrape', (req, res) => {
     let restaurants = {};
+    let result = {};
     let promises = [];
+
+    result.restaurants = {};
+    result.updated = new Date();
 
     promises.push(scrapers.slagthuset());
     promises.push(scrapers.meck());
@@ -21,13 +25,13 @@ app.get('/scrape', (req, res) => {
 
     Promise.all(promises)
         .then(response => {
-            restaurants['Slagthuset'] = response[0];
-            restaurants['M.E.C.K']    = response[1];
-            restaurants['MiaMarias']  = response[2];
-            restaurants['Välfärden']  = response[3];
-            restaurants['Glasklart']  = response[4];
+            result.restaurants['Slagthuset'] = response[0];
+            result.restaurants['M.E.C.K']    = response[1];
+            result.restaurants['MiaMarias']  = response[2];
+            result.restaurants['Välfärden']  = response[3];
+            result.restaurants['Glasklart']  = response[4];
 
-            fs.writeFile(outputName, JSON.stringify(restaurants), err => {
+            fs.writeFile(outputName, JSON.stringify(result), err => {
                 if(err) {
                     console.log(err); 
                 }
