@@ -5,7 +5,7 @@ import scrapers from './scrapers';
 import cors from 'cors';
 
 const app = express();
-const outputName = '../menus.json';
+const outputName = 'menus.json';
 
 app.use(cors());
 
@@ -52,9 +52,5 @@ app.get('/api/menus', (req, res) => {
         res.json(JSON.parse(data));
     });
 });
-
-app.listen(8081);
-
-console.log('Running');
 
 exports = module.exports = app;
