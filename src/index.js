@@ -9,7 +9,7 @@ const outputName = 'menus.json';
 
 app.use(cors());
 
-app.get('/scrape', (req, res) => {
+app.get('/', (req, res) => {
     let result = {};
     let promises = [];
 
