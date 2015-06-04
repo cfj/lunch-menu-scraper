@@ -4,16 +4,19 @@ import Promise from 'promise';
 function slagthuset() {
     return new Promise((resolve, reject) => {
         let url = 'http://www.slagthus.se/';
-        let menu = [];
+        let restaurant = {};
+
+        restaurant.menu = [];
+        restaurant.url = url;
 
         scrape(url, '.printable', week => {
-            menu[0] = week[0].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
-            menu[1] = week[1].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
-            menu[2] = week[2].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
-            menu[3] = week[3].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
-            menu[4] = week[4].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
+            restaurant.menu[0] = week[0].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
+            restaurant.menu[1] = week[1].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
+            restaurant.menu[2] = week[2].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
+            restaurant.menu[3] = week[3].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
+            restaurant.menu[4] = week[4].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
 
-            resolve(menu);
+            resolve(restaurant);
         });
     });
 }
@@ -21,16 +24,19 @@ function slagthuset() {
 function meck() {
     return new Promise((resolve, reject) => {
         let url = 'http://meckok.se/lunch/';
-        let menu = [];
+        let restaurant = {};
+
+        restaurant.menu = [];
+        restaurant.url = url;
 
         scrape(url, '#veckanslunch article', week => {
-            menu[0] = week[0].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
-            menu[1] = week[1].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
-            menu[2] = week[2].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
-            menu[3] = week[3].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
-            menu[4] = week[4].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
+            restaurant.menu[0] = week[0].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
+            restaurant.menu[1] = week[1].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
+            restaurant.menu[2] = week[2].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
+            restaurant.menu[3] = week[3].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
+            restaurant.menu[4] = week[4].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
 
-            resolve(menu);
+            resolve(restaurant);
         });
     });
 }
@@ -38,19 +44,22 @@ function meck() {
 function miamarias() {
     return new Promise((resolve, reject) => {
         let url = 'http://www.miamarias.nu/';
-        let menu = [];
+        let restaurant = {};
+
+        restaurant.menu = [];
+        restaurant.url = url;
 
         scrape(url, '.et-tabs-content', week => {
-            menu[0] = week[0].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
-            menu[1] = week[1].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
-            menu[2] = week[2].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
-            menu[3] = week[3].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
-            menu[4] = week[4].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
+            restaurant.menu[0] = week[0].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
+            restaurant.menu[1] = week[1].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
+            restaurant.menu[2] = week[2].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
+            restaurant.menu[3] = week[3].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
+            restaurant.menu[4] = week[4].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
 
-            menu[4] = menu[4].split(' ');
-            menu[4] = menu[4].slice(0, menu[4].indexOf('Prenumera')).join(' ');
+            restaurant.menu[4] = restaurant.menu[4].split(' ');
+            restaurant.menu[4] = restaurant.menu[4].slice(0, restaurant.menu[4].indexOf('Prenumera')).join(' ');
 
-            resolve(menu);
+            resolve(restaurant);
         });
     });
 }
@@ -58,16 +67,19 @@ function miamarias() {
 function valfarden() {
     return new Promise((resolve, reject) => {
         let url = 'http://valfarden.nu/?page_id=14';
-        let menu = [];
+        let restaurant = {};
+
+        restaurant.menu = [];
+        restaurant.url = url;
 
         scrape(url, '.single_inside_content p', week => {
-            menu[0] = week[0].slice(2).join(' ').trim();
-            menu[1] = week[1].slice(2).join(' ').trim();
-            menu[2] = week[2].slice(2).join(' ').trim();
-            menu[3] = week[3].slice(2).join(' ').trim();
-            menu[4] = week[4].slice(2).join(' ').trim();
+            restaurant.menu[0] = week[0].slice(2).join(' ').trim();
+            restaurant.menu[1] = week[1].slice(2).join(' ').trim();
+            restaurant.menu[2] = week[2].slice(2).join(' ').trim();
+            restaurant.menu[3] = week[3].slice(2).join(' ').trim();
+            restaurant.menu[4] = week[4].slice(2).join(' ').trim();
 
-            resolve(menu);
+            resolve(restaurant);
         });
     });
 }
@@ -75,16 +87,19 @@ function valfarden() {
 function glasklart() {
     return new Promise((resolve, reject) => {
         let url = 'http://glasklart.eu/lunch/';
-        let menu = [];
+        let restaurant = {};
+
+        restaurant.menu = [];
+        restaurant.url = url;
 
         scrape(url, '#cardcatid-8', week => {
-            menu[0] = week[0].slice(2).join(' ').trim();
-            menu[1] = week[1].slice(2).join(' ').trim();
-            menu[2] = week[2].slice(2).join(' ').trim();
-            menu[3] = week[3].slice(2).join(' ').trim();
-            menu[4] = week[4].slice(2).join(' ').trim();
+            restaurant.menu[0] = week[0].slice(2).join(' ').trim();
+            restaurant.menu[1] = week[1].slice(2).join(' ').trim();
+            restaurant.menu[2] = week[2].slice(2).join(' ').trim();
+            restaurant.menu[3] = week[3].slice(2).join(' ').trim();
+            restaurant.menu[4] = week[4].slice(2).join(' ').trim();
 
-            resolve(menu);
+            resolve(restaurant);
         });
     });
 }
