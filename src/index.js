@@ -42,7 +42,9 @@ app.get('/', (req, res) => {
                     console.log(err);
                 }
                 else {
-                    fs.unlinkSync(outputName);
+                    if (fs.existsSync(outputName)) {
+                        fs.unlinkSync(outputName);
+                    }
                     res.send("Scraped and saved to S3.");
                 }
            });
