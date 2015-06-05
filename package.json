@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/cfj/Lunch-menu-scraper",
   "dependencies": {
+    "aws-sdk": "^2.1.33",
     "cheerio": "^0.19.0",
     "cors": "^2.7.1",
     "express": "^4.12.4",
