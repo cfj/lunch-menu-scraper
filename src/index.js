@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 
             params.Body = JSON.stringify(result);
 
-            s3.putObject(params, function(err, data) {
+            s3.putObject(params, (err, data) => {
                 if (err) {
                     console.log(err);
                 }
