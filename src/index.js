@@ -42,6 +42,7 @@ app.get('/', (req, res) => {
                     console.log(err);
                 }
                 else {
+                    fs.unlinkSync(outputName);
                     res.send("Scraped and saved to S3.");
                 }
            });
@@ -74,6 +75,16 @@ app.get('/api/menus', (req, res) => {
         } else {
             res.json(JSON.parse(data));
         }
+    });
+});
+
+app.get('/api/menus/local', (req, res) => {
+    fs.readFile(outputName, 'utf8', (err, data) => {
+        if (err) {
+            console.log(err);
+        }
+
+        res.json(JSON.parse(data));
     });
 });
 
