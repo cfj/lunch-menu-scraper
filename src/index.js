@@ -78,14 +78,4 @@ app.get('/api/menus', (req, res) => {
     });
 });
 
-app.get('/api/menus/local', (req, res) => {
-    fs.readFile(outputName, 'utf8', (err, data) => {
-        if (err) {
-            console.log(err);
-        }
-
-        res.json(JSON.parse(data));
-    });
-});
-
 exports = module.exports = app;
