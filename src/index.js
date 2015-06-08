@@ -25,11 +25,9 @@ app.get('/', (req, res) => {
 
     Promise.all(promises)
         .then(response => {
-            result.restaurants['Slagthuset'] = response[0];
-            result.restaurants['M.E.C.K']    = response[1];
-            result.restaurants['MiaMarias']  = response[2];
-            result.restaurants['Välfärden']  = response[3];
-            result.restaurants['Glasklart']  = response[4];
+            for (let i = 0; i < response.length; i++) {
+                result.restaurants[response[i].name] = response[i];
+            }
 
             params.Body = JSON.stringify(result);
 
@@ -44,7 +42,6 @@ app.get('/', (req, res) => {
                     res.send("Scraped and saved to S3.");
                 }
            });
-
         })
         .catch(err => {
             console.log(err);

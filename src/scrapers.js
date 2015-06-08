@@ -8,6 +8,7 @@ function slagthuset() {
 
         restaurant.menu = [];
         restaurant.url = url;
+        restaurant.name = 'Slagthuset';
 
         scrape(url, '.printable', week => {
             for(let i = 0; i < 5; i++) {
@@ -26,6 +27,7 @@ function meck() {
 
         restaurant.menu = [];
         restaurant.url = url;
+        restaurant.name = 'M.E.C.K';
 
         scrape(url, '#veckanslunch article', week => {
             for(let i = 0; i < 5; i++) {
@@ -44,6 +46,7 @@ function miamarias() {
 
         restaurant.menu = [];
         restaurant.url = url;
+        restaurant.name = 'MiaMarias';
 
         scrape(url, '.et-tabs-content', week => {
             for(let i = 0; i < 5; i++) {
@@ -65,6 +68,7 @@ function valfarden() {
 
         restaurant.menu = [];
         restaurant.url = url;
+        restaurant.name = 'Välfärden';
 
         scrape(url, '.single_inside_content p', week => {
             for(let i = 0; i < 5; i++) {
@@ -83,6 +87,7 @@ function glasklart() {
 
         restaurant.menu = [];
         restaurant.url = url;
+        restaurant.name = 'Glasklart';
 
         scrape(url, '#cardcatid-12', week => {
             for(let i = 0; i < 5; i++) {
