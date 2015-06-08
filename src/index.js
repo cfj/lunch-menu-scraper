@@ -14,18 +14,14 @@ app.use(cors());
 
 app.get('/', (req, res) => {
     let result = {};
-    let promises = [];
+    let promises;
     let s3 = new aws.S3();
     let params = { Bucket: process.env.S3_BUCKET, Key: outputName };
 
     result.restaurants = {};
     result.updated = new Date();
 
-    promises.push(scrapers.slagthuset());
-    promises.push(scrapers.meck());
-    promises.push(scrapers.miamarias());
-    promises.push(scrapers.valfarden());
-    promises.push(scrapers.glasklart());
+    promises = Object.getOwnPropertyNames(scrapers).map((name) => scrapers[name]());
 
     Promise.all(promises)
         .then(response => {
