@@ -92,7 +92,7 @@ function glasklart() {
         restaurant.menu = [];
         restaurant.url = url;
 
-        scrape(url, '#cardcatid-8', week => {
+        scrape(url, '#cardcatid-12', week => {
             restaurant.menu[0] = week[0].slice(2).join(' ').trim();
             restaurant.menu[1] = week[1].slice(2).join(' ').trim();
             restaurant.menu[2] = week[2].slice(2).join(' ').trim();
