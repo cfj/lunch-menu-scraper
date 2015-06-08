@@ -21,13 +21,13 @@ app.get('/', (req, res) => {
     result.restaurants = {};
     result.updated = new Date();
 
-    promises = Object.getOwnPropertyNames(scrapers).map((name) => scrapers[name]());
+    promises = Object.getOwnPropertyNames(scrapers).map(name => scrapers[name]());
 
     Promise.all(promises)
         .then(response => {
-            for (let i = 0; i < response.length; i++) {
-                result.restaurants[response[i].name] = response[i];
-            }
+            response.forEach(restaurant => {
+                result.restaurants[restaurant.name] = restaurant;
+            });
 
             params.Body = JSON.stringify(result);
 
