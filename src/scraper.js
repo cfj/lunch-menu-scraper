@@ -21,7 +21,7 @@ function scrape(url, selector, callback) {
 
             callback(week);
         }
-    });   
+    });
 }
 
 module.exports = scrape;
