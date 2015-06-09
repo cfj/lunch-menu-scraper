@@ -45,13 +45,11 @@ function apiHandler (req, res) {
 
     fsp.readFileAsync(outputName, 'utf8')
         .then(data => {
-            console.log('sending from file');
             res.json(JSON.parse(data));
         })
         .catch(err => {
             s3.getObjectAsync(params)
                 .then(data => {
-                    console.log('fetching from s3');
                     output = data.Body.toString();
                     return fsp.writeFileAsync(outputName, output);
                 })
