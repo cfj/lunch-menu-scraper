@@ -8,8 +8,6 @@ import handlers from './handlers';
 
 const app = express();
 
-aws.config.region = process.env.REGION || aws.config.region;
-
 app.use(cors());
 
 app.get('/', handlers.rootHandler);

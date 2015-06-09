@@ -19,6 +19,7 @@
   "homepage": "https://github.com/cfj/Lunch-menu-scraper",
   "dependencies": {
     "aws-sdk": "^2.1.33",
+    "bluebird": "^2.9.27",
     "cheerio": "^0.19.0",
     "cors": "^2.7.1",
     "express": "^4.12.4",
