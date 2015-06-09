@@ -1,9 +1,5 @@
 import express from 'express';
-import Promise from 'promise';
-import fs from 'fs';
-import scrapers from './scrapers';
 import cors from 'cors';
-import aws from 'aws-sdk';
 import handlers from './handlers';
 
 const app = express();
