@@ -1,5 +1,5 @@
 import Promise from 'bluebird';
-import fs from 'fs';
+import _fs from 'fs';
 import aws from 'aws-sdk';
 import scrapers from './scrapers';
 
@@ -7,7 +7,7 @@ aws.config.region = process.env.REGION || aws.config.region;
 
 const outputName = 'menus.json';
 const s3 = Promise.promisifyAll(new aws.S3());
-const fsp = Promise.promisifyAll(fs);
+const fs = Promise.promisifyAll(_fs);
 
 function rootHandler (req, res) {
     let result = {};
@@ -43,7 +43,7 @@ function apiHandler (req, res) {
     let params = { Bucket: process.env.S3_BUCKET, Key: outputName, ResponseContentType : 'application/json' };
     let output;
 
-    fsp.readFileAsync(outputName, 'utf8')
+    fs.readFileAsync(outputName, 'utf8')
         .then(data => {
             res.json(JSON.parse(data));
         })
@@ -51,7 +51,7 @@ function apiHandler (req, res) {
             s3.getObjectAsync(params)
                 .then(data => {
                     output = data.Body.toString();
-                    return fsp.writeFileAsync(outputName, output);
+                    return fs.writeFileAsync(outputName, output);
                 })
                 .then((data) => {
                     res.json(JSON.parse(output));
