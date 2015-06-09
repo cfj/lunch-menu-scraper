@@ -5,10 +5,16 @@ import scrapers from './scrapers';
 
 const outputName = 'menus.json';
 
+const s3 = new aws.S3();
+
+const read  = Promise.denodeify(fs.readFile);
+const write = Promise.denodeify(fs.writeFile);
+const s3Get = Promise.denodeify(s3.getObject);
+const s3Put = Promise.denodeify(s3.putObject);
+
 function rootHandler (req, res) {
     let result = {};
     let promises;
-    let s3 = new aws.S3();
     let params = { Bucket: process.env.S3_BUCKET, Key: outputName };
 
     result.restaurants = {};
@@ -24,17 +30,14 @@ function rootHandler (req, res) {
 
             params.Body = JSON.stringify(result);
 
-            s3.putObject(params, (err, data) => {
-                if (err) {
-                    console.log(err);
-                }
-                else {
-                    if (fs.existsSync(outputName)) {
-                        fs.unlinkSync(outputName);
-                    }
-                    res.send("Scraped and saved to S3.");
-                }
-           });
+            return s3Put(params);
+        })
+        .then(() => {
+            if (fs.existsSync(outputName)) {
+                fs.unlinkSync(outputName);
+            }
+
+            res.send("Scraped and saved to S3.");
         })
         .catch(err => {
             console.log(err);
@@ -42,28 +45,22 @@ function rootHandler (req, res) {
 }
 
 function apiHandler (req, res) {
-    let s3 = new aws.S3();
     let params = { Bucket: process.env.S3_BUCKET, Key: outputName, ResponseContentType : 'application/json' };
 
-    fs.readFile(outputName, 'utf8', (err, data) => {
-        if (err) {
-            s3.getObject(params, (err, data) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    fs.writeFile(outputName, data.Body.toString(), err => {
-                        if(err) {
-                            console.log(err); 
-                        } else {
-                            res.json(JSON.parse(data.Body.toString()));
-                        }
-                    });
-                }
-            });
-        } else {
+    read(outputName, 'utf8')
+        .then(data => {
             res.json(JSON.parse(data));
-        }
-    });
+        })
+        .catch(err => {
+            s3Get(params)
+                .then(data => {
+                    return write(outputName, data.Body.toString());
+                })
+                .then((data) => {
+                    res.json(JSON.parse(data));
+                })
+                .catch(console.log.bind(console));
+        });
 }
 
 module.exports = {
