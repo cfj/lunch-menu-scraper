@@ -34,7 +34,7 @@ function rootHandler (req, res) {
                 fs.unlinkSync(outputName);
             }
 
-            res.send("Scraped and saved to S3.");
+            res.send('Scraped and saved to S3.');
         })
         .catch(console.log.bind(console));
 }
