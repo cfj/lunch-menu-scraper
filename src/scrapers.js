@@ -50,7 +50,7 @@ function miamarias() {
 
         scrape(url, '.et-tabs-content', week => {
             for(let i = 0; i < 5; i++) {
-                restaurant.menu[i] = week[i].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/Fisk|Kött|Vegetarisk/g, '').replace(/:-/g, ' ').trim();
+                restaurant.menu[i] = week[i].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/:-/g, ' ').trim();
             }
 
             restaurant.menu[4] = restaurant.menu[4].split(' ');
