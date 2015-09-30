@@ -10,7 +10,7 @@ function slagthuset() {
         restaurant.url = url;
         restaurant.name = 'Slagthuset';
 
-        scrape(url, '.col-lg-6 p', week => {
+        scrape(url, '.menu-hide .col-lg-6.menu-box', week => {
             for(let i = 0; i < 5; i++) {
                 restaurant.menu[i] = week[i].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
             }
