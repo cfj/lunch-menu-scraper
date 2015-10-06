@@ -1,7 +1,7 @@
 import request from 'request';
 import cheerio from 'cheerio';
 
-const days = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag'];
+const days = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag'];
 
 function scrape(url, selector, callback) {
     let content = '';
@@ -13,7 +13,8 @@ function scrape(url, selector, callback) {
 
             $(selector).each((index, element) => content += ' ' + $(element).text());
 
-            content = content.split(' ').map(e => e.trim());
+            content = content.split(/\s+/).map(e => e.trim());
+            content = content.map(e => e.toLowerCase());
 
             for(let i = 0; i < days.length; i++) {
                 week[i] = content.slice(content.indexOf(days[i]), i !== days.length - 1 ? content.indexOf(days[i+1]) : undefined);
