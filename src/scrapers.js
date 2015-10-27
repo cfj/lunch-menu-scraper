@@ -80,25 +80,6 @@ function valfarden() {
     });
 }
 
-function glasklart() {
-    return new Promise((resolve, reject) => {
-        let url = 'http://glasklart.eu/lunch/';
-        let restaurant = {};
-
-        restaurant.menu = [];
-        restaurant.url = url;
-        restaurant.name = 'Glasklart';
-
-        scrape(url, '#cardcatid-12', week => {
-            for(let i = 0; i < 5; i++) {
-                restaurant.menu[i] = week[i].slice(2).join(' ').trim();
-            }
-
-            resolve(restaurant);
-        });
-    });
-}
-
 function kolga() {
     return new Promise((resolve, reject) => {
         let url = "https://gastrogate.com/restaurang/kolga/page/3/";
@@ -125,6 +106,5 @@ module.exports = {
     meck,
     miamarias,
     valfarden,
-    glasklart,
     kolga
 }
