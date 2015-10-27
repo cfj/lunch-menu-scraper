@@ -99,10 +99,32 @@ function glasklart() {
     });
 }
 
+function kolga() {
+    return new Promise((resolve, reject) => {
+        let url = "https://gastrogate.com/restaurang/kolga/page/3/";
+        let restaurant = {};
+
+        restaurant.menu = [];
+        restaurant.url = url;
+        restaurant.name = 'Kolga';
+
+        scrape(url, '.table.lunch_menu', week => {
+            for(let i = 0; i < 5; i++) {
+                restaurant.menu[i] = week[i].slice(3).join(' ').replace(/\s\d{2}:-/g, '. ').trim();
+            }
+
+            restaurant.menu[4] = restaurant.menu[4].substring(0, restaurant.menu[4].indexOf('gäller'));
+
+            resolve(restaurant);
+        });
+    });
+}
+
 module.exports = {
     slagthuset,
     meck,
     miamarias,
     valfarden,
-    glasklart
+    glasklart,
+    kolga
 }
