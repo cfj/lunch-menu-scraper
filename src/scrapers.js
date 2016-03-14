@@ -1,5 +1,6 @@
 import scrape from './scraper';
 import Promise from 'promise';
+import capitalize from 'capitalize';
 
 function slagthuset() {
     return new Promise((resolve, reject) => {
@@ -12,7 +13,11 @@ function slagthuset() {
 
         scrape(url, '.menu-hide .col-lg-6.menu-box', week => {
             for(let i = 0; i < 5; i++) {
-                restaurant.menu[i] = week[i].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').trim();
+                restaurant.menu[i] = week[i].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '')
+                                            .replace('veckans långkok', '<strong>Veckans långkok:</strong> ')
+                                            .replace('dagens rätt', '<br><strong>Dagens rätt:</strong> ')
+                                            .replace('dagens vegetariska', '<br><strong>Dagens vegetariska:</strong> ')
+                                            .trim();
             }
 
             resolve(restaurant);
@@ -31,7 +36,10 @@ function meck() {
 
         scrape(url, '#veckanslunch article', week => {
             for(let i = 0; i < 5; i++) {
-                restaurant.menu[i] = week[i].slice(2).join(' ').replace('Dagens: ', '').replace('Vegetarisk: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '').trim();
+                restaurant.menu[i] = week[i].slice(2).join(' ').replace('dagens: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '')
+                                            .replace('dagens', '<strong>Dagens:</strong> ')
+                                            .replace('vegetarisk: ', '<br><strong>Vegetarisk: </strong')
+                                            .trim();
             }
 
             resolve(restaurant);
@@ -50,7 +58,12 @@ function miamarias() {
 
         scrape(url, '.et-tabs-content', week => {
             for(let i = 0; i < 5; i++) {
-                restaurant.menu[i] = week[i].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/:-/g, ' ').trim();
+                restaurant.menu[i] = week[i].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/:-/g, ' ')
+                                            .replace('fisk', '<strong>Fisk:</strong> ')
+                                            .replace('kött', '<br><strong>Kött:</strong> ')
+                                            .replace('vegetarisk', '<br><strong>Vegetarisk:</strong> ')
+                                            .replace('    ', ' ')
+                                            .trim();
             }
 
             restaurant.menu[4] = restaurant.menu[4].split(' ');
@@ -73,6 +86,7 @@ function valfarden() {
         scrape(url, '.single_inside_content p', week => {
             for(let i = 0; i < 5; i++) {
                 restaurant.menu[i] = week[i].slice(2).join(' ').trim();
+                restaurant.menu[i] = capitalize(restaurant.menu[i]);
             }
 
             resolve(restaurant);
