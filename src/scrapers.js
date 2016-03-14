@@ -36,10 +36,13 @@ function meck() {
 
         scrape(url, '#veckanslunch article', week => {
             for(let i = 0; i < 5; i++) {
-                restaurant.menu[i] = week[i].slice(2).join(' ').replace('dagens: ', '').replace(/\n+/g, '. ').replace(/\t+/g, '')
-                                            .replace('dagens', '<strong>Dagens:</strong> ')
-                                            .replace('vegetarisk: ', '<br><strong>Vegetarisk: </strong')
+                restaurant.menu[i] = week[i].slice(2).join(' ').replace(/\n+/g, '. ').replace(/\t+/g, '')
+                                            .replace('dagens:', '')
+                                            .replace('vegetarisk: ', '<br><strong>Vegetariskt: </strong>')
+                                            .replace('vegetariskt: ', '<br><strong>Vegetariskt: </strong>')
+                                            .replace('(', '<br>(')
                                             .trim();
+                restaurant.menu[i] = capitalize(restaurant.menu[i]);
             }
 
             resolve(restaurant);
@@ -105,7 +108,10 @@ function kolga() {
 
         scrape(url, '.table.lunch_menu', week => {
             for(let i = 0; i < 5; i++) {
-                restaurant.menu[i] = week[i].slice(3).join(' ').replace(/\s\d{2}:-/g, '. ').trim();
+                restaurant.menu[i] = week[i].slice(3).join(' ').replace(/\s\d{2}:-/g, '. ')
+                                            .replace('.', '.<br>')
+                                            .trim();
+                restaurant.menu[i] = capitalize(restaurant.menu[i]);
             }
 
             restaurant.menu[4] = restaurant.menu[4].substring(0, restaurant.menu[4].indexOf('gäller'));
