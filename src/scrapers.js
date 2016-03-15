@@ -70,7 +70,7 @@ function miamarias() {
             }
 
             restaurant.menu[4] = restaurant.menu[4].split(' ');
-            restaurant.menu[4] = restaurant.menu[4].slice(0, restaurant.menu[4].indexOf('Prenumera')).join(' ');
+            restaurant.menu[4] = restaurant.menu[4].slice(0, restaurant.menu[4].indexOf('prenumera')).join(' ');
 
             resolve(restaurant);
         });
@@ -91,6 +91,9 @@ function valfarden() {
                 restaurant.menu[i] = week[i].slice(2).join(' ').trim();
                 restaurant.menu[i] = capitalize(restaurant.menu[i]);
             }
+
+            let vegetariskIndex = restaurant.menu[4].indexOf('fredagslyx');
+            restaurant.menu[4] = restaurant.menu[4].substr(0, vegetariskIndex);
 
             resolve(restaurant);
         });
@@ -121,10 +124,34 @@ function kolga() {
     });
 }
 
+function saltimporten() {
+    return new Promise((resolve, reject) => {
+        let url = "http://www.saltimporten.com/";
+        let restaurant = {};
+
+        restaurant.menu = [];
+        restaurant.url = url;
+        restaurant.name = 'Saltimporten';
+
+        scrape(url, 'ul.list-unstyled', week => {
+            for(let i = 0; i < 5; i++) {
+                restaurant.menu[i] = week[i].slice(1).join(' ').replace(/\d+\/\d+/g, '').trim();
+                restaurant.menu[i] = capitalize.words(restaurant.menu[i]);
+            }
+
+            let vegetariskIndex = restaurant.menu[4].indexOf('vegetariskt');
+            restaurant.menu[4] = restaurant.menu[4].substr(0, vegetariskIndex);
+
+            resolve(restaurant);
+        });
+    });
+}
+
 module.exports = {
     slagthuset,
     meck,
     miamarias,
     valfarden,
-    kolga
+    kolga,
+    saltimporten
 }

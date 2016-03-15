@@ -13,8 +13,14 @@ function scrape(url, selector, callback) {
 
             $(selector).each((index, element) => content += ' ' + $(element).text());
 
-            content = content.split(/\s+/).map(e => e.trim());
-            content = content.map(e => e.toLowerCase());
+            content = content.replace(/\d+\/\d+/g, '');
+            content = content.toLowerCase();
+
+            for(let i = 0; i < days.length; i++) {
+                content = content.replace(days[i], ' ' + days[i]);
+            }
+
+            content = content.split(/\s+/);
 
             for(let i = 0; i < days.length; i++) {
                 week[i] = content.slice(content.indexOf(days[i]), i !== days.length - 1 ? content.indexOf(days[i+1]) : undefined);
