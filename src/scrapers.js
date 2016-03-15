@@ -124,6 +124,22 @@ function kolga() {
     });
 }
 
+function akvariet() {
+    var url = "http://akvariet-malmo.se/dagens-lunch/";
+    var restaurant = {};
+
+    restaurant.menu = [];
+    restaurant.url = url;
+    restaurant.name = 'Akvariet';
+
+    scrape(url, '.enigma_blog_post_content', function(week) {
+        for(var i = 0; i < 5; i++) {
+            restaurant.menu[i] = week[i].slice(3).join(' ').trim();
+            restaurant.menu[i] = capitalize(restaurant.menu[i]);
+        }
+    });
+}
+
 function saltimporten() {
     return new Promise((resolve, reject) => {
         let url = "http://www.saltimporten.com/";
@@ -153,5 +169,6 @@ module.exports = {
     miamarias,
     valfarden,
     kolga,
+    akvariet,
     saltimporten
 }

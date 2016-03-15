@@ -15,6 +15,8 @@ function scrape(url, selector, callback) {
 
             content = content.replace(/\d+\/\d+/g, '');
             content = content.toLowerCase();
+            let akvarietFix = content.indexOf('=');
+            content = content.substr(akvarietFix);
 
             for(let i = 0; i < days.length; i++) {
                 content = content.replace(days[i], ' ' + days[i]);
