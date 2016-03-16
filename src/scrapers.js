@@ -144,6 +144,26 @@ function akvariet() {
     });
 }
 
+function glasklart() {
+    return new Promise((resolve, reject) => {
+        let url = 'http://glasklart.eu/lunch/';
+        let restaurant = {};
+
+        restaurant.menu = [];
+        restaurant.url = url;
+        restaurant.name = 'Glasklart';
+
+        scrape(url, '.lunch-entries.lunch-entries-r.entriesv.lunch-entry-v1', week => {
+            for(let i = 0; i < 5; i++) {
+                restaurant.menu[i] = week[i].slice(1).join(' ').trim();
+                restaurant.menu[i] = capitalize(restaurant.menu[i]);
+            }
+
+            resolve(restaurant);
+        });
+    });
+}
+
 function saltimporten() {
     return new Promise((resolve, reject) => {
         let url = "http://www.saltimporten.com/";
@@ -174,5 +194,6 @@ module.exports = {
     valfarden,
     kolga,
     akvariet,
+    glasklart,
     saltimporten
 }

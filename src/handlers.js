@@ -27,11 +27,19 @@ function rootHandler (req, res) {
 
             params.Body = JSON.stringify(result);
 
+            fs.writeFile(outputName, JSON.stringify(result), err => {
+                if(err) {
+                    console.log(err); 
+                }
+
+                res.send('done');
+            });
+
             return s3.putObjectAsync(params);
         })
         .then(() => {
             if (fs.existsSync(outputName)) {
-                fs.unlinkSync(outputName);
+                //fs.unlinkSync(outputName);
             }
 
             res.send('Scraped and saved to S3.');
