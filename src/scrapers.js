@@ -88,7 +88,7 @@ function valfarden() {
 
         scrape(url, '.single_inside_content p', week => {
             for(let i = 0; i < 5; i++) {
-                restaurant.menu[i] = week[i].slice(2).join(' ').trim();
+                restaurant.menu[i] = week[i].slice(1).join(' ').trim();
                 restaurant.menu[i] = capitalize(restaurant.menu[i]);
             }
 
