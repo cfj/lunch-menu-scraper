@@ -4,7 +4,7 @@ import capitalize from 'capitalize';
 
 function slagthuset() {
     return new Promise((resolve, reject) => {
-        let url = 'http://www.slagthus.se/';
+        let url = 'http://slagthus.se/konferens-och-massor/';
         let restaurant = {};
 
         restaurant.menu = [];
