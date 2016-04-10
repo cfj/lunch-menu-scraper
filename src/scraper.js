@@ -3,6 +3,11 @@ import cheerio from 'cheerio';
 
 const days = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag'];
 
+/**
+ * @param  {string} url The url of the web page to scrape.
+ * @param  {string} selector The css selector identifying the elements to scrape.
+ * @param  {function} callback The function that gets passed the result of the scrape.
+ */
 function scrape(url, selector, callback) {
     let content = '';
     let week = [[], [], [], [], []];
