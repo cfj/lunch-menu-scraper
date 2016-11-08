@@ -19,7 +19,25 @@ function scrape(url, selector, callback) {
             $(selector).each((index, element) => content += ' ' + $(element).text());
 
             content = content.replace(/\d+\/\d+/g, '');
+
+            if(url.indexOf('plectrum') > -1) {
+                content = content.replace(/Mån/, 'måndag');
+                content = content.replace(/Tis/, 'tisdag');
+                content = content.replace(/Ons/, 'onsdag');
+                content = content.replace(/Tor/, 'torsdag');
+                content = content.replace(/Fre/, 'fredag');
+            }
+
+            if(url.indexOf('glasklart') > -1) {
+                content = content.replace('Måndag', 'måndag ');
+                content = content.replace('Tisdag', 'tisdag ');
+                content = content.replace('Onsdag', 'onsdag ');
+                content = content.replace('Torsdag', 'torsdag ');
+                content = content.replace('Fredag', 'fredag ');
+            }
+
             content = content.toLowerCase();
+
             let akvarietFix = content.indexOf('====');
             if(akvarietFix > -1) {
                 content = content.substr(akvarietFix);

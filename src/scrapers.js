@@ -187,6 +187,29 @@ function saltimporten() {
     });
 }
 
+function plectrum() {
+    return new Promise((resolve, reject) => {
+        let url = 'http://plectrum.se/malmo/?page_id=47';
+        let restaurant = {};
+
+        restaurant.menu = [];
+        restaurant.url = url;
+        restaurant.name = 'Plectrum';
+
+        scrape(url, '.post-content', week => {
+            for(let i = 0; i < 5; i++) {
+                restaurant.menu[i] = week[i].slice(1).join(' ')
+                                                     .replace('kött:', '<strong>Kött:</strong> ')
+                                                     .replace('fisk:', '<br><strong>Fisk:</strong> ')
+                                                     .replace('vegetarisk:', '<br><strong>Vegetarisk:</strong> ')
+                                                     .trim();
+            }
+
+            resolve(restaurant);
+        });
+    });
+}
+
 module.exports = {
     slagthuset,
     meck,
@@ -195,5 +218,6 @@ module.exports = {
     kolga,
     akvariet,
     glasklart,
-    saltimporten
+    saltimporten,
+    plectrum
 }
