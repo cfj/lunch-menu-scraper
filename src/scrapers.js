@@ -210,6 +210,31 @@ function plectrum() {
     });
 }
 
+function restaurangP2() {
+    return new Promise((resolve, reject) => {
+        let url = 'http://restaurangp2.se/lunch';
+        let restaurant = {};
+
+        restaurant.menu = [];
+        restaurant.url = url;
+        restaurant.name = 'Restaurang P2';
+
+        scrape(url, '.main_content_menu', week => {
+            for(let i = 0; i < 5; i++) {
+                restaurant.menu[i] = week[i].slice(1).join(' ')
+                                                    .replace('local', '<strong>Local:</strong> ')
+                                                    .replace('worldwide', '<br><strong>Worldwide:</strong> ')
+                                                    .replace('world wide', '<br><strong>Worldwide:</strong> ')
+                                                    .replace('chefs corner', '<br><strong>Chefs corner:</strong> ')
+                                                    .replace(/\d+ kr/g, '')
+                                                     .trim();
+            }
+
+            resolve(restaurant);
+        });
+    });
+}
+
 module.exports = {
     slagthuset,
     meck,
@@ -219,5 +244,6 @@ module.exports = {
     akvariet,
     glasklart,
     saltimporten,
-    plectrum
+    plectrum,
+    restaurangP2
 }
