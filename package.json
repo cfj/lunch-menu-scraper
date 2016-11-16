@@ -2,7 +2,7 @@
   "name": "Lunch-menu-scraper",
   "version": "0.0.1",
   "description": "",
-  "main": "server.js",
+  "main": "scraper-server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "babel src --out-dir lib"
