@@ -1,17 +1,19 @@
+import config from './config';
 import scrape from './scraper';
 import Promise from 'promise';
 import capitalize from 'capitalize';
 
 function slagthuset() {
     return new Promise((resolve, reject) => {
-        let url = 'http://slagthus.se/konferens-och-massor/';
+        let url = config.slagthuset.url;
         let restaurant = {};
 
         restaurant.menu = [];
         restaurant.url = url;
-        restaurant.name = 'Slagthuset';
+        restaurant.mapUrl = config.slagthuset.mapUrl;
+        restaurant.name = config.slagthuset.name;
 
-        scrape(url, '.menu-hide .col-lg-6.menu-box', week => {
+        scrape(url, config.slagthuset.scraperSelector, week => {
             for(let i = 0; i < 5; i++) {
                 restaurant.menu[i] = week[i].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '')
                                             .replace('veckans långkok', '<strong>Veckans långkok:</strong> ')
@@ -27,14 +29,15 @@ function slagthuset() {
 
 function meck() {
     return new Promise((resolve, reject) => {
-        let url = 'http://meckok.se/lunch/';
+        let url = config.meck.url;
         let restaurant = {};
 
         restaurant.menu = [];
         restaurant.url = url;
-        restaurant.name = 'M.E.C.K';
+        restaurant.mapUrl = config.meck.mapUrl;
+        restaurant.name = config.meck.name;
 
-        scrape(url, '#veckanslunch article', week => {
+        scrape(url, config.meck.scraperSelector, week => {
             for(let i = 0; i < 5; i++) {
                 restaurant.menu[i] = week[i].slice(2).join(' ').replace(/\n+/g, '. ').replace(/\t+/g, '')
                                             .replace('dagens:', '')
@@ -52,14 +55,15 @@ function meck() {
 
 function miamarias() {
     return new Promise((resolve, reject) => {
-        let url = 'http://www.miamarias.nu/';
+        let url = config.miamarias.url;
         let restaurant = {};
 
         restaurant.menu = [];
         restaurant.url = url;
-        restaurant.name = 'MiaMarias';
+        restaurant.mapUrl = config.miamarias.mapUrl;
+        restaurant.name = config.miamarias.name;
 
-        scrape(url, '.et-tabs-content', week => {
+        scrape(url, config.miamarias.scraperSelector, week => {
             for(let i = 0; i < 5; i++) {
                 restaurant.menu[i] = week[i].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/:-/g, ' ')
                                             .replace('fisk', '<strong>Fisk:</strong> ')
@@ -79,14 +83,15 @@ function miamarias() {
 
 function valfarden() {
     return new Promise((resolve, reject) => {
-        let url = 'http://valfarden.nu/?page_id=14';
+        let url = config.valfarden.url;
         let restaurant = {};
 
         restaurant.menu = [];
         restaurant.url = url;
-        restaurant.name = 'Välfärden';
+        restaurant.mapUrl = config.valfarden.mapUrl;
+        restaurant.name = config.valfarden.name;
 
-        scrape(url, '.single_inside_content p', week => {
+        scrape(url, config.valfarden.scraperSelector, week => {
             for(let i = 0; i < 5; i++) {
                 restaurant.menu[i] = week[i].slice(1).join(' ').trim();
                 restaurant.menu[i] = capitalize(restaurant.menu[i]);
@@ -102,14 +107,15 @@ function valfarden() {
 
 function kolga() {
     return new Promise((resolve, reject) => {
-        let url = "https://gastrogate.com/restaurang/kolga/page/3/";
+        let url = config.kolga.url;
         let restaurant = {};
 
         restaurant.menu = [];
         restaurant.url = url;
-        restaurant.name = 'Kolga';
+        restaurant.mapUrl = config.kolga.mapUrl;
+        restaurant.name = config.kolga.name;
 
-        scrape(url, '.table.lunch_menu', week => {
+        scrape(url, config.kolga.scraperSelector, week => {
             for(let i = 0; i < 5; i++) {
                 restaurant.menu[i] = week[i].slice(3).join(' ').replace(/\s\d{2}:-/g, '. ')
                                             .replace('.', '.<br>')
@@ -126,14 +132,15 @@ function kolga() {
 
 function akvariet() {
     return new Promise((resolve, reject) => {
-        let url = "http://akvariet-malmo.se/dagens-lunch/";
+        let url = config.akvariet.url;
         let restaurant = {};
 
         restaurant.menu = [];
         restaurant.url = url;
-        restaurant.name = 'Akvariet';
+        restaurant.mapUrl = config.akvariet.mapUrl;
+        restaurant.name = config.akvariet.name;
 
-        scrape(url, '.enigma_blog_post_content', week => {
+        scrape(url, config.akvariet.scraperSelector, week => {
             for(let i = 0; i < 5; i++) {
                 restaurant.menu[i] = week[i].slice(3).join(' ').trim();
                 restaurant.menu[i] = capitalize(restaurant.menu[i]);
@@ -146,14 +153,15 @@ function akvariet() {
 
 function glasklart() {
     return new Promise((resolve, reject) => {
-        let url = 'http://glasklart.eu/lunch/';
+        let url = config.glasklart.url;
         let restaurant = {};
 
         restaurant.menu = [];
         restaurant.url = url;
-        restaurant.name = 'Glasklart';
+        restaurant.mapUrl = config.glasklart.mapUrl;
+        restaurant.name = config.glasklart.name;
 
-        scrape(url, '.lunch-entries.lunch-entries-r.entriesv.lunch-entry-v1', week => {
+        scrape(url, config.glasklart.scraperSelector, week => {
             for(let i = 0; i < 5; i++) {
                 restaurant.menu[i] = week[i].slice(1).join(' ').trim();
                 restaurant.menu[i] = capitalize(restaurant.menu[i]);
@@ -166,14 +174,15 @@ function glasklart() {
 
 function saltimporten() {
     return new Promise((resolve, reject) => {
-        let url = "http://www.saltimporten.com/";
+        let url = config.saltimporten.url;
         let restaurant = {};
 
         restaurant.menu = [];
         restaurant.url = url;
-        restaurant.name = 'Saltimporten';
+        restaurant.mapUrl = config.saltimporten.mapUrl;
+        restaurant.name = config.saltimporten.name;
 
-        scrape(url, 'ul.list-unstyled', week => {
+        scrape(url, config.saltimporten.scraperSelector, week => {
             for(let i = 0; i < 5; i++) {
                 restaurant.menu[i] = week[i].slice(1).join(' ').replace(/\d+\/\d+/g, '').trim();
                 restaurant.menu[i] = capitalize.words(restaurant.menu[i]);
@@ -189,14 +198,15 @@ function saltimporten() {
 
 function plectrum() {
     return new Promise((resolve, reject) => {
-        let url = 'http://plectrum.se/malmo/?page_id=47';
+        let url = config.plectrum.url;
         let restaurant = {};
 
         restaurant.menu = [];
         restaurant.url = url;
-        restaurant.name = 'Plectrum';
+        restaurant.mapUrl = config.plectrum.mapUrl;
+        restaurant.name = config.plectrum.name;
 
-        scrape(url, '.post-content', week => {
+        scrape(url, config.plectrum.scraperSelector, week => {
             for(let i = 0; i < 5; i++) {
                 restaurant.menu[i] = week[i].slice(1).join(' ')
                                                      .replace('kött:', '<strong>Kött:</strong> ')
@@ -212,14 +222,15 @@ function plectrum() {
 
 function restaurangP2() {
     return new Promise((resolve, reject) => {
-        let url = 'http://restaurangp2.se/lunch';
+        let url = config.restaurangP2.url;
         let restaurant = {};
 
         restaurant.menu = [];
         restaurant.url = url;
-        restaurant.name = 'Restaurang P2';
+        restaurant.mapUrl = config.restaurangP2.mapUrl;
+        restaurant.name = config.restaurangP2.name;
 
-        scrape(url, '.main_content_menu', week => {
+        scrape(url, config.restaurangP2.scraperSelector, week => {
             for(let i = 0; i < 5; i++) {
                 restaurant.menu[i] = week[i].slice(1).join(' ')
                                                     .replace('local', '<strong>Local:</strong> ')
