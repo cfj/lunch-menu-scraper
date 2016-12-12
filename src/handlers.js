@@ -12,7 +12,7 @@ const fs = Promise.promisifyAll(_fs);
 function rootHandler (req, res) {
     let result = {};
     let promises;
-    let params = { Bucket: process.env.S3_BUCKET, Key: outputName, ContentType: 'application/json' };
+    let params = { Bucket: process.env.S3_BUCKET, Key: outputName, ContentType: 'application/json', CacheControl: 'max-age=432000' };
 
     result.restaurants = {};
     result.updated = new Date();
