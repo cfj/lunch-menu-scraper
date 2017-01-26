@@ -65,7 +65,7 @@ function miamarias() {
 
         scrape(url, config.miamarias.scraperSelector, week => {
             for(let i = 0; i < 5; i++) {
-                restaurant.menu[i] = week[i].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/:-/g, ' ')
+                restaurant.menu[i] = week[i].slice(1).join(' ').replace(/\n+/g, '').replace(/\t+/g, '').replace(/\d+/g, '').replace('/', '').replace(/:-/g, ' ').replace(/kr /g, '')
                                             .replace('fisk', '<strong>Fisk:</strong> ')
                                             .replace('kött', '<br><strong>Kött:</strong> ')
                                             .replace('vegetarisk', '<br><strong>Vegetarisk:</strong> ')
