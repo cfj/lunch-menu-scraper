@@ -7,17 +7,17 @@ config.slagthuset = {
     name: 'Slagthuset'
 };
 
-config.meck = {
-    url: 'http://meckok.se/lunch/',
-    mapUrl: 'https://www.google.se/maps/place/Restaurang+M.E.C.K./@55.612262,12.9895263,17z/data=!3m1!4b1!4m5!3m4!1s0x4653a4079f592acd:0x33fae3be661b5707!8m2!3d55.612262!4d12.991715',
-    scraperSelector: '#veckanslunch article',
-    name: 'M.E.C.K'
+config.storavarvsgatan = {
+    url: 'http://storavarvsgatan6.se/projects.html',
+    mapUrl: 'https://www.google.se/maps/place/Media+Evolution/@55.6124811,12.9912092,18.82z/data=!4m13!1m7!3m6!1s0x4653a4079f7b933b:0x14136ff54618c5d4!2sStora+Varvsgatan+6A,+211+19+Malm%C3%B6!3b1!8m2!3d55.6123845!4d12.9915055!3m4!1s0x4653a3f88fcb575b:0x283b008711377c95!8m2!3d55.6123507!4d12.9917146',
+    scraperSelector: '.self.mobile-leaf.text.textnormal',
+    name: 'Stora Varvsgatan 6A'
 };
 
 config.miamarias = {
     url: 'http://www.miamarias.nu/',
     mapUrl: 'https://www.google.se/maps/place/MiaMarias/@55.6120552,12.9920197,17z/data=!3m1!4b1!4m5!3m4!1s0x4653a3f87c3eb4c3:0x12b496ca4a390642!8m2!3d55.6120552!4d12.9942084',
-    scraperSelector: '.et-tabs-content',
+    scraperSelector: '.et_pb_row.et_pb_row_2',
     name: 'MiaMarias'
 };
 
@@ -38,14 +38,14 @@ config.kolga = {
 config.akvariet = {
     url: 'http://akvariet-malmo.se/dagens-lunch/',
     mapUrl: 'https://www.google.se/maps/place/Akvariet+Event+%26+Konferens/@55.6143222,12.9874215,17z/data=!3m1!4b1!4m5!3m4!1s0x4653a4063109dd1f:0x6d5e826034d4df3b!8m2!3d55.6143222!4d12.9896102',
-    scraperSelector: '.enigma_blog_post_content',
+    scraperSelector: '.alacarte_dish',
     name: 'Akvariet'
 };
 
 config.glasklart = {
-    url: 'http://glasklart.eu/lunch/',
+    url: 'https://glasklart.eu/sv/lunch/',
     mapUrl: 'https://www.google.se/maps/place/Glasklart/@55.6150564,12.9882601,17z/data=!3m1!4b1!4m5!3m4!1s0x4653a4062a8ec867:0x8f3ef24048062845!8m2!3d55.6150564!4d12.9904488',
-    scraperSelector: '.lunch-entries.lunch-entries-r.entriesv.lunch-entry-v1',
+    scraperSelector: '#glasklartlunchwidget-2',
     name: 'Glasklart'
 };
 
@@ -56,17 +56,10 @@ config.saltimporten = {
     name: 'Saltimporten'
 };
 
-config.plectrum = {
-    url: 'http://plectrum.se/malmo/?page_id=47',
-    mapUrl: 'https://www.google.se/maps/place/Plectrum+Malm%C3%B6/@55.6109046,12.9987159,17z/data=!3m1!4b1!4m5!3m4!1s0x4653a3fa329d3a63:0x3ee9016dd2b109f!8m2!3d55.6109046!4d13.0009046',
-    scraperSelector: '.post-content',
-    name: 'Plectrum'
-};
-
 config.restaurangP2 = {
     url: 'http://restaurangp2.se/lunch',
     mapUrl: 'https://www.google.se/maps/place/P2/@55.6143877,12.9863253,17z/data=!3m1!4b1!4m5!3m4!1s0x4653a406322f8f6d:0x3f46ec084eaf7219!8m2!3d55.6143877!4d12.988514',
-    scraperSelector: '.main_content_menu',
+    scraperSelector: '.col-md-12',
     name: 'Restaurang P2'
 };
 

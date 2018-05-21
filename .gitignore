@@ -2,3 +2,4 @@ menus.json
 .env
 Procfile
 .tmp
+node_modules

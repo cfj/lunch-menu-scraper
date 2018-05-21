@@ -27,17 +27,17 @@ function slagthuset() {
     });
 }
 
-function meck() {
+function storavarvsgatan() {
     return new Promise((resolve, reject) => {
-        let url = config.meck.url;
+        let url = config.storavarvsgatan.url;
         let restaurant = {};
 
         restaurant.menu = [];
         restaurant.url = url;
-        restaurant.mapUrl = config.meck.mapUrl;
-        restaurant.name = config.meck.name;
+        restaurant.mapUrl = config.storavarvsgatan.mapUrl;
+        restaurant.name = config.storavarvsgatan.name;
 
-        scrape(url, config.meck.scraperSelector, week => {
+        scrape(url, config.storavarvsgatan.scraperSelector, week => {
             for(let i = 0; i < 5; i++) {
                 restaurant.menu[i] = week[i].slice(2).join(' ').replace(/\n+/g, '. ').replace(/\t+/g, '')
                                             .replace('dagens:', '')
@@ -196,30 +196,6 @@ function saltimporten() {
     });
 }
 
-function plectrum() {
-    return new Promise((resolve, reject) => {
-        let url = config.plectrum.url;
-        let restaurant = {};
-
-        restaurant.menu = [];
-        restaurant.url = url;
-        restaurant.mapUrl = config.plectrum.mapUrl;
-        restaurant.name = config.plectrum.name;
-
-        scrape(url, config.plectrum.scraperSelector, week => {
-            for(let i = 0; i < 5; i++) {
-                restaurant.menu[i] = week[i].slice(1).join(' ')
-                                                     .replace('kött:', '<strong>Kött:</strong> ')
-                                                     .replace('fisk:', '<br><strong>Fisk:</strong> ')
-                                                     .replace('vegetarisk:', '<br><strong>Vegetarisk:</strong> ')
-                                                     .trim();
-            }
-
-            resolve(restaurant);
-        });
-    });
-}
-
 function restaurangP2() {
     return new Promise((resolve, reject) => {
         let url = config.restaurangP2.url;
@@ -248,13 +224,12 @@ function restaurangP2() {
 
 module.exports = {
     slagthuset,
-    meck,
+    storavarvsgatan,
     miamarias,
     valfarden,
     kolga,
     akvariet,
     glasklart,
     saltimporten,
-    plectrum,
     restaurangP2
 }
